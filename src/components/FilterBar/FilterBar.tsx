@@ -41,61 +41,59 @@ export default function FilterBar({ filters, values, onChange }: FilterBarProps)
 
   return (
     <>
-      <div className={styles.bar}>
-        {filters.map((f) => {
-          const selected = values[f.key]
-          const label = selected
-            ? (f.options.find((o) => o.value === selected)?.label ?? f.placeholder)
-            : f.placeholder
-          return (
-            <button
-              key={f.key}
-              className={`${styles.chip} ${selected ? styles.chipActive : ''}`}
-              onClick={() => openSheet(f)}
-            >
-              <span>{label}</span>
-              <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-                <path d="M3 4.5l3 3 3-3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-            </button>
-          )
-        })}
-      </div>
-
-      {/* Bottom Sheet */}
-      {sheet && (
-        <div className={styles.overlay} onClick={() => setSheet(null)}>
-          <div className={styles.sheet} onClick={(e) => e.stopPropagation()}>
-            <div className={styles.sheetHandle} />
-            <div className={styles.sheetHeader}>
-              <span>{sheet.label}</span>
-              <button className={styles.sheetClose} onClick={() => setSheet(null)}>
-                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                  <path d="M5 5l10 10M15 5L5 15" stroke="rgba(0,0,0,0.48)" strokeWidth="1.5" strokeLinecap="round" />
+      <div className={styles.container}>
+        <div className={styles.bar}>
+          {filters.map((f) => {
+            const selected = values[f.key]
+            const label = selected
+              ? (f.options.find((o) => o.value === selected)?.label ?? f.placeholder)
+              : f.placeholder
+            const isOpen = sheet?.key === f.key
+            return (
+              <button
+                key={f.key}
+                className={`${styles.chip} ${selected ? styles.chipActive : ''} ${isOpen ? styles.chipOpen : ''}`}
+                onClick={() => isOpen ? setSheet(null) : openSheet(f)}
+              >
+                <span>{label}</span>
+                <svg
+                  width="12" height="12" viewBox="0 0 12 12" fill="none"
+                  className={`${styles.arrow} ${isOpen ? styles.arrowUp : ''}`}
+                >
+                  <path d="M3 4.5l3 3 3-3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
               </button>
-            </div>
-            <div className={styles.sheetOptions}>
-              <button
-                className={`${styles.option} ${!sheet.selected ? styles.optionActive : ''}`}
-                onClick={() => selectOption('')}
-              >
-                <span>全部</span>
-                {!sheet.selected && <CheckIcon />}
-              </button>
-              {sheet.options.map((opt) => (
-                <button
-                  key={opt.value}
-                  className={`${styles.option} ${sheet.selected === opt.value ? styles.optionActive : ''}`}
-                  onClick={() => selectOption(opt.value)}
-                >
-                  <span>{opt.label}</span>
-                  {sheet.selected === opt.value && <CheckIcon />}
-                </button>
-              ))}
-            </div>
-          </div>
+            )
+          })}
         </div>
+
+        {/* Dropdown Panel */}
+        {sheet && (
+          <div className={styles.dropdown}>
+            <button
+              className={`${styles.option} ${!sheet.selected ? styles.optionActive : ''}`}
+              onClick={() => selectOption('')}
+            >
+              <span>全部</span>
+              {!sheet.selected && <CheckIcon />}
+            </button>
+            {sheet.options.map((opt) => (
+              <button
+                key={opt.value}
+                className={`${styles.option} ${sheet.selected === opt.value ? styles.optionActive : ''}`}
+                onClick={() => selectOption(opt.value)}
+              >
+                <span>{opt.label}</span>
+                {sheet.selected === opt.value && <CheckIcon />}
+              </button>
+            ))}
+          </div>
+        )}
+      </div>
+
+      {/* 透明遮罩，点击外部关闭 */}
+      {sheet && (
+        <div className={styles.backdrop} onClick={() => setSheet(null)} />
       )}
     </>
   )
