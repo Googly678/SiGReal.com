@@ -1,0 +1,142 @@
+/* ============================================================
+   Global Reset & Mobile Base — Claude/Anthropic Design System
+   ============================================================ */
+@import './tokens.css';
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html {
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-sans);
+  font-size: var(--text-body-std);
+  line-height: var(--lh-body);
+  letter-spacing: var(--ls-body);
+  color: var(--color-text-primary);
+  background-color: var(--color-parchment);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overscroll-behavior: none;
+}
+
+/* Headings use the serif typeface at weight 500 — the Anthropic voice */
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+  font-family: var(--font-serif);
+  font-weight: 500;
+  line-height: var(--lh-sub);
+}
+
+p { margin: 0; }
+
+a {
+  color: var(--color-terracotta);
+  text-decoration: none;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  background: none;
+  font-family: var(--font-sans);
+  font-size: var(--text-body-std);
+  padding: 0;
+}
+
+input, textarea, select {
+  font-family: var(--font-sans);
+  font-size: var(--text-body-std);
+  outline: none;
+}
+
+img { display: block; max-width: 100%; }
+
+ul, ol { margin: 0; padding: 0; list-style: none; }
+
+/* ── App Shell ── */
+#root {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  background: var(--color-parchment);
+}
+
+/* ── Page Container (inside BottomNav layout) ── */
+.page-container {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-bottom: calc(var(--bottom-nav-height) + env(safe-area-inset-bottom, 0px));
+  -webkit-overflow-scrolling: touch;
+}
+
+/* ── Screen Reader Only ── */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ── Page Header ── */
+.page-header {
+  padding: var(--space-9) var(--space-9) var(--space-7);
+  background: var(--color-parchment);
+  position: sticky;
+  top: 0;
+  z-index: var(--z-nav);
+  border-bottom: 1px solid var(--color-border-cream);
+}
+
+.page-header h1 {
+  font-family: var(--font-serif);
+  font-size: var(--text-sub);
+  font-weight: 500;
+  line-height: var(--lh-sub);
+  color: var(--color-text-primary);
+  margin-bottom: var(--space-7);
+}
+
+/* ── Section Divider ── */
+.section-divider {
+  height: 1px;
+  background: var(--color-border-cream);
+  margin: 0 var(--space-7);
+}
+
+/* ── Scrollbar Hide (mobile) ── */
+.hide-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* ── Focus Ring — only cool color moment (accessibility) ── */
+:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 2px;
+}
+
+/* ── Body Lock (when modal open) ── */
+body.modal-open {
+  overflow: hidden;
+  position: fixed;
+  width: 100%;
+}

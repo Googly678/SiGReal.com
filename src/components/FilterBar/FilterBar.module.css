@@ -1,0 +1,132 @@
+.bar {
+  display: flex;
+  gap: var(--space-4);
+  align-items: center;
+  overflow-x: auto;
+  padding: var(--space-4) 0;
+  scrollbar-width: none;
+}
+
+.bar::-webkit-scrollbar {
+  display: none;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  white-space: nowrap;
+  background: var(--color-warm-sand);
+  border: 1px solid var(--color-border-warm);
+  border-radius: var(--radius-standard);
+  box-shadow: var(--shadow-ring-sand);
+  padding: 0 12px;
+  height: 36px;
+  font-family: var(--font-sans);
+  font-size: var(--text-caption);
+  font-weight: 400;
+  color: var(--color-text-charcoal);
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background 0.12s, border-color 0.12s;
+}
+
+.chipActive {
+  background: rgba(201, 100, 66, 0.12);
+  border-color: rgba(201, 100, 66, 0.35);
+  color: var(--color-terracotta);
+}
+
+/* ── Bottom Sheet ── */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.32);
+  z-index: var(--z-modal);
+  display: flex;
+  align-items: flex-end;
+  animation: fadeIn 0.2s ease;
+}
+
+.sheet {
+  width: 100%;
+  background: var(--color-ivory);
+  border-radius: var(--radius-max) var(--radius-max) 0 0;
+  padding-bottom: env(safe-area-inset-bottom, 16px);
+  animation: slideUp 0.25s cubic-bezier(0.32, 0.72, 0, 1);
+  max-height: 70vh;
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid var(--color-border-warm);
+}
+
+.sheetHandle {
+  width: 36px;
+  height: 5px;
+  border-radius: 3px;
+  background: rgba(0, 0, 0, 0.16);
+  margin: 10px auto 0;
+  flex-shrink: 0;
+}
+
+.sheetHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px 12px;
+  font-family: var(--font-serif);
+  font-size: var(--text-body);
+  font-weight: 500;
+  color: var(--color-text-primary);
+  border-bottom: 1px solid var(--color-border-cream);
+  flex-shrink: 0;
+}
+
+.sheetClose {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-circle);
+  background: var(--color-warm-sand);
+  border: 1px solid var(--color-border-warm);
+}
+
+.sheetOptions {
+  overflow-y: auto;
+  padding: 8px 0 8px;
+}
+
+.option {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 20px;
+  font-family: var(--font-sans);
+  font-size: var(--text-body-std);
+  color: var(--color-text-primary);
+  cursor: pointer;
+  text-align: left;
+  border-bottom: 1px solid var(--color-border-cream);
+}
+
+.option:last-child {
+  border-bottom: none;
+}
+
+.optionActive {
+  color: var(--color-terracotta);
+  font-weight: 500;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0 }
+  to   { opacity: 1 }
+}
+
+@keyframes slideUp {
+  from { transform: translateY(100%) }
+  to   { transform: translateY(0) }
+}

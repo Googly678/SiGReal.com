@@ -1,0 +1,35 @@
+.page {
+  min-height: 100%;
+  background: var(--color-parchment);
+  display: flex;
+  flex-direction: column;
+}
+
+.downloadLink {
+  display: inline-flex;
+  align-items: center;
+  height: 32px;
+  padding: 0 14px;
+  border-radius: var(--radius-high);
+  background: var(--color-terracotta);
+  color: var(--color-ivory);
+  font-family: var(--font-sans);
+  font-size: var(--text-caption);
+  font-weight: 500;
+  box-shadow: var(--shadow-ring-terra);
+}
+
+.previewArea {
+  flex: 1;
+  padding: 16px;
+}
+
+.iframe {
+  width: 100%;
+  height: calc(100vh - 88px - var(--bottom-nav-height));
+  border: none;
+  border-radius: var(--radius-featured);
+  background: var(--color-ivory);
+  box-shadow: var(--shadow-whisper);
+  border: 1px solid var(--color-border-cream);
+}
